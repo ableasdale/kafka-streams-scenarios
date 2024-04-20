@@ -7,3 +7,9 @@ Exploring what will happen when a Kafka Streams application is configured with t
 ```bash
 docker-compose up -d
 ```
+
+## Troubleshooting
+
+```bash
+docker-compose exec broker kafka-topics --list --bootstrap-server broker:9092
+```
