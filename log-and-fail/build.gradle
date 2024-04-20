@@ -20,6 +20,8 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.5.0'
     // https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients
     implementation 'org.apache.kafka:kafka-clients:3.7.0'
+    // https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams
+    implementation 'org.apache.kafka:kafka-streams:3.7.0'
 }
 
 test {
