@@ -31,11 +31,13 @@ public class Helper {
 
     public static final Properties getKafkaStreamsProperties() {
         final Properties props = new Properties();
-        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "count-application");
+        props.put(StreamsConfig.APPLICATION_ID_CONFIG, "nope");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, Config.BOOTSTRAP_HOST_AND_TCP_PORT);
         props.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG, LogAndFailExceptionHandler.class);
         props.put(StreamsConfig.DEFAULT_PRODUCTION_EXCEPTION_HANDLER_CLASS_CONFIG, DefaultProductionExceptionHandler.class);
-       // props.put(StreamsConfig.)
+       props.put(StreamsConfig.RETRIES_CONFIG, "3");
+       props.put(StreamsConfig.TASK_TIMEOUT_MS_CONFIG, "1000");
+        // props.put(StreamsConfig.)
        // props.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String());
        // props.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String());
         return props;

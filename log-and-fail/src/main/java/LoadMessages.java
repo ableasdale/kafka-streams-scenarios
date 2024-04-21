@@ -67,11 +67,10 @@ public class LoadMessages {
                 .to(Config.DESTINATION_TOPIC, Produced.with(Serdes.ByteArray(), Serdes.ByteArray()));
         Topology topology = builder.build();
 
-        LOG.info("Top:"+topology.describe());
+        LOG.info("Topology:"+topology.describe());
 
         KafkaStreams streams = new KafkaStreams(topology, Helper.getKafkaStreamsProperties());
         streams.setUncaughtExceptionHandler((exception) -> StreamsUncaughtExceptionHandler.StreamThreadExceptionResponse.SHUTDOWN_CLIENT);
-        //streams.setUncaughtExceptionHandler(StreamsUncaughtExceptionHandler.StreamThreadExceptionResponse.SHUTDOWN_CLIENT);
         streams.start();
     }
 

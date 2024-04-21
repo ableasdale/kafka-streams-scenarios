@@ -13,3 +13,9 @@ docker-compose up -d
 ```bash
 docker-compose exec broker kafka-topics --list --bootstrap-server broker:9092
 ```
+
+Cleanup
+
+```bash
+docker-compose down && docker container prune && docker-compose up -d
+```
