@@ -42,10 +42,10 @@ public class Helper {
         props.put(StreamsConfig.APPLICATION_ID_CONFIG, "nope");
         props.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, Config.BOOTSTRAP_HOST_AND_TCP_PORT);
         // props.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG, LogAndFailExceptionHandler.class);
-        props.put(StreamsConfig.DEFAULT_PRODUCTION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDlqProductionExceptionHandler.class.getName());
+        props.put(StreamsConfig.DEFAULT_PRODUCTION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDlqProductionExceptionHandler.class);
        props.put(StreamsConfig.RETRIES_CONFIG, "3");
        props.put(StreamsConfig.TASK_TIMEOUT_MS_CONFIG, "1000");
-        props.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDeadLetterQueueExceptionHandler.class.getName());
+        props.put(StreamsConfig.DEFAULT_DESERIALIZATION_EXCEPTION_HANDLER_CLASS_CONFIG, SendToDeadLetterQueueExceptionHandler.class);
         // Override the Producer to make the failure happen much faster
         // delivery.timeout.ms should be equal to or larger than linger.ms + request.timeout.ms
         props.put(ProducerConfig.LINGER_MS_CONFIG, "10");

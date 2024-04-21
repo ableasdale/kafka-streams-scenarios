@@ -24,6 +24,13 @@ public class SendToDeadLetterQueueExceptionHandler implements DeserializationExc
                                                  final ConsumerRecord<byte[], byte[]> record,
                                                  final Exception exception) {
 
+        LOG.info("boom! (9)DeserializationExceptionHandler)");
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         LOG.warn("Exception caught during Deserialization, sending to the dead queue topic; " +
                         "taskId: {}, topic: {}, partition: {}, offset: {}",
                 context.taskId(), record.topic(), record.partition(), record.offset(),
@@ -36,6 +43,12 @@ public class SendToDeadLetterQueueExceptionHandler implements DeserializationExc
 
     @Override
     public void configure(final Map<String, ?> configs) {
+        LOG.info("**** Sleeping at SendToDeadLetterQueueExceptionHandler");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         dlqProducer = Helper.getDlqProducer();
         dlqTopic = Config.DEAD_LETTER_QUEUE_TOPIC;
     }

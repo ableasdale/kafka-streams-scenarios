@@ -36,12 +36,25 @@ public class SendToDlqProductionExceptionHandler implements ProductionExceptionH
 
     @Override
     public void configure(Map<String, ?> map) {
+        LOG.info("**** Sleeping at SendToDlqProductionExceptionHandler");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         dlqProducer = Helper.getDlqProducer();
         dlqTopic = Config.DEAD_LETTER_QUEUE_TOPIC;
     }
 
     @Override
     public ProductionExceptionHandlerResponse handle(ProducerRecord<byte[], byte[]> producerRecord, Exception e) {
+        LOG.info("boom");
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+        LOG.info("FLIPPIN HECK - WE'RE HERE!! -- 1");
         if (e instanceof RecordTooLargeException) {
             LOG.info("FLIPPIN HECK - WE'RE HERE!!");
             try {

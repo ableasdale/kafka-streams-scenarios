@@ -66,13 +66,16 @@ public class KStreamsWithDLQ {
         StreamsBuilder builder = new StreamsBuilder();
         //StreamsBuilder builder = new StreamsBuilder();
         builder.stream(Config.SOURCE_TOPIC, Consumed.with(Serdes.ByteArray(), Serdes.ByteArray()))
+                .peek((key, value) -> LOG.info("Incoming record - key " +key +" value " + value))
                 .to(Config.DESTINATION_TOPIC, Produced.with(Serdes.ByteArray(), Serdes.ByteArray()));
         Topology topology = builder.build();
 
         LOG.info("Topology:"+topology.describe());
 
         KafkaStreams streams = new KafkaStreams(topology, Helper.getKafkaStreamsProperties());
-        streams.setUncaughtExceptionHandler((exception) -> StreamsUncaughtExceptionHandler.StreamThreadExceptionResponse.SHUTDOWN_CLIENT);
+       // streams.setUncaughtExceptionHandler((exception) -> StreamsUncaughtExceptionHandler.StreamThreadExceptionResponse.SHUTDOWN_CLIENT);
+
+        streams.setUncaughtExceptionHandler(new StreamsCustomUncaughtExceptionHandler());
         streams.start();
     }
 
